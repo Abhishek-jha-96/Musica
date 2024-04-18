@@ -1,0 +1,20 @@
+version: '4.0'
+
+services:
+
+  minio:
+    image: minio/minio
+    ports:
+      -9000:9000
+      -9090:9090
+    volumes:
+      - 'minio_data:/data'
+    
+    env_file:
+      - .envs/local/dev.env
+
+    command: server /data --console-address ":9090"
+
+volumes:
+  minio_data:
+    driver: local        

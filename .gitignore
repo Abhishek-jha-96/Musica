@@ -34,3 +34,10 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+
+backend/myenv
+backend/server/Api/__pycache__
+backend/server/server/__pycache__
+
+db.sqlite3
