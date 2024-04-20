@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { ComponentProps } from "@/constants/ImageData";
 
 export default function CardElm() {
     return(
@@ -9,9 +10,9 @@ export default function CardElm() {
             height={100}
             alt="sample"
             />
-            <div className=" w-10 h-10 absolute z-10 top-16 right-5 bg-white">
+            {/* <div className=" w-10 h-10 absolute z-10 top-16 right-5 bg-white">
                 
-            </div>
+            </div> */}
             <h4>Just Hits</h4>
         </div>
     )

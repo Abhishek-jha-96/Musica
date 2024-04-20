@@ -1,7 +1,8 @@
-import Image from "next/image";
 import CardElm from "../shared/cardelm";
 import NavBar from "@/components/NavBar";
 import Cover from "@/components/Cover";
+
+
 
 export default function Music() {
   return (
