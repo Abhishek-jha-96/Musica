@@ -13,7 +13,6 @@ export default function Home() {
       </div>
       <div className="bg-black h-[10%]">
         <Player />
-        <audio src="/audio1.mp3"></audio>
       </div>
     </main>
   );

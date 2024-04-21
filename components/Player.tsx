@@ -3,40 +3,19 @@ import Image from "next/image";
 import React, { useEffect, useRef, useState } from "react";
 import { Play, Pause } from "lucide-react";
 import { Progress } from "@/components/ui/progress";
+import ReactPlayer from "react-player/youtube";
 
 export default function Player() {
   const [play, setPlay] = useState<boolean>(false);
-  const [duration, setDuration] = useState<number>(0);
-  const audioRef = useRef<HTMLAudioElement>(null);
+  const [playedSeconds, setPlayedSeconds] = useState<number>(0);
 
-  useEffect(() => {
-    const audioElement = audioRef.current;
-    const handleLoadedMetadata = () => {
-      if (audioElement) {
-        setDuration(audioElement.duration);
-      }
-    };
-
-    if (audioElement) {
-      audioElement.addEventListener("loadedmetadata", handleLoadedMetadata);
-
-      // Cleanup function
-      return () => {
-        audioElement.removeEventListener(
-          "loadedmetadata",
-          handleLoadedMetadata
-        );
-      };
-    }
-  }, [audioRef.current]);
+  const handleProgress = (progress: any) => {
+    // Extracting playedSeconds from progress object and updating state
+    setPlayedSeconds(progress.played);
+  };
 
   const togglePlay = () => {
     setPlay(!play);
-    if (play) {
-      audioRef.current?.pause();
-    } else {
-      audioRef.current?.play();
-    }
   };
 
   return (
@@ -49,7 +28,7 @@ export default function Player() {
         <div>
           <h1 className=" text-yellow-400">Song Title</h1>
           <h2 className="text-white/55">Artist</h2>
-          <h3 className="text-white">{duration.toFixed(2)} seconds</h3>
+          <h3 className="text-white">{playedSeconds.toFixed(2)} seconds</h3>
         </div>
       </div>
       {/* play button */}
@@ -65,12 +44,16 @@ export default function Player() {
       </div>
       {/* progress bar */}
       <div className="w-[60%] px-8">
-        <Progress value={duration} className=" bg-white" />
+        <Progress value={playedSeconds*10} className=" bg-white" />
       </div>
       {/* Audio element */}
-      <audio ref={audioRef}>
-        <source src="/audio1.mp3" type="audio/mpeg" />
-      </audio>
+      <div className=" hidden">
+        <ReactPlayer
+          playing={play}
+          url="https://www.youtube.com/watch?v=LXb3EKWsInQ"
+          onProgress={handleProgress}
+        />
+      </div>
     </div>
   );
 }
