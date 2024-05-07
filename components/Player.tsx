@@ -1,14 +1,17 @@
 "use client";
 import Image from "next/image";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useState, useContext } from "react";
 import { Play, Pause } from "lucide-react";
 import { Progress } from "@/components/ui/progress";
 import ReactPlayer from "react-player/youtube";
+import { MyContext } from "@/context/MyContext";
 
 export default function Player() {
   const [play, setPlay] = useState<boolean>(false);
   const [playedSeconds, setPlayedSeconds] = useState<number>(0);
 
+  const { data } = useContext(MyContext);
+ 
   const handleProgress = (progress: any) => {
     // Extracting playedSeconds from progress object and updating state
     setPlayedSeconds(progress.played);
@@ -23,12 +26,11 @@ export default function Player() {
       {/* Song Details  */}
       <div className="flex items-center px-5 gap-9">
         <div>
-          <Image src="/sample_img.png" alt="" width={50} height={50} />
+          <Image src={data.cover_url} alt="" width={50} height={50} />
         </div>
         <div>
-          <h1 className=" text-yellow-400">Song Title</h1>
-          <h2 className="text-white/55">Artist</h2>
-          <h3 className="text-white">{playedSeconds.toFixed(2)} seconds</h3>
+          <h1 className=" text-yellow-400">{data.song_name}</h1>
+          <h2 className="text-white/55">{data.artists}</h2>
         </div>
       </div>
       {/* play button */}
@@ -44,13 +46,13 @@ export default function Player() {
       </div>
       {/* progress bar */}
       <div className="w-[60%] px-8">
-        <Progress value={playedSeconds*10} className=" bg-white" />
+        <Progress value={playedSeconds * 10} className=" bg-white" />
       </div>
       {/* Audio element */}
       <div className=" hidden">
         <ReactPlayer
           playing={play}
-          url="https://www.youtube.com/watch?v=LXb3EKWsInQ"
+          url={data.song_url}
           onProgress={handleProgress}
         />
       </div>
