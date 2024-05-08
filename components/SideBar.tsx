@@ -7,8 +7,8 @@ import { SongsProps } from "@/constants/ImageData";
 
 export default function SideBar() {
   const { data, handleSetData } = useContext(MyContext);
-
   const [allMusic, setAllMusic] = useState<SongsProps[]>([]);
+  const [clickedIndex, setClickedIndex] = useState<number | null>(null);
   const url: string = "http://127.0.0.1:8000/songs/";
 
   useEffect(() => {
@@ -21,9 +21,6 @@ export default function SideBar() {
         const Data: SongsProps[] = await response.json();
         setAllMusic(Data);
         
-        if (!data || Object.keys(data).length === 0) {
-          handleSetData(Data[0]);
-        }
 
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -33,10 +30,9 @@ export default function SideBar() {
   }, []);
 
 
-  const handleClick = (music: SongsProps) => {
-    if (music) {
-      handleSetData(music);
-    }
+  const handleClick = (index: number) => {
+    setClickedIndex(index);
+    handleSetData(allMusic[index]);
   };
 
   return (
@@ -44,8 +40,11 @@ export default function SideBar() {
       <h1 className=" p-5 text-2xl font-semibold">Playing Tracks</h1>
       {allMusic.map((music, index) => (
         <div
-          className="flex justify-between items-center w-[85%] border-2 border-black/20 mx-7 my-5"
-          onClick={() => handleClick(music)}
+        className={`flex justify-between items-center w-[85%] border-2 mx-7 my-5 transition-all ease-in-out duration-500 ${
+          index === clickedIndex ? "bg-black/90 text-white scale-105" : "border-black/20"
+        }`}
+        onClick={() => handleClick(index)}
+        key={index}
         >
           <Image
             src={music.cover_url}

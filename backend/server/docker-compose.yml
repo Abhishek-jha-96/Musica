@@ -13,26 +13,11 @@ services:
     restart: always  
     depends_on:
       - db
-      - minio
+
   
   db: 
     image: postgres:latest
     env_file:
       - .env/local/dev.env
   
-  minio:
-    image: minio/minio
-    ports:
-      -9000:9000
-      -9090:9090
-    volumes:
-      - 'minio_data:/data'
-    
-    env_file:
-      - .envs/local/dev.env
-
-    command: server /data --console-address ":9090"
-
-volumes:
-  minio_data:
-    driver: local        
+     

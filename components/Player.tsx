@@ -16,7 +16,7 @@ export default function Player() {
     // Extracting playedSeconds from progress object and updating state
     setPlayedSeconds(progress.played);
   };
-
+  console.log(data.song_url);
   const togglePlay = () => {
     setPlay(!play);
   };
