@@ -3,14 +3,16 @@ import Image from "next/image";
 import { Heart } from "lucide-react";
 import { useEffect, useState, useContext } from "react";
 import { MyContext } from "@/context/MyContext";
-import { SongsProps } from "@/constants/ImageData";
+import { SongsProps, AllSongsProps } from "@/constants/ImageData";
 
 export default function SideBar() {
   const { data, handleSetData } = useContext(MyContext);
   const [allMusic, setAllMusic] = useState<SongsProps[]>([]);
+  const [allData, setAllData] = useState<AllSongsProps | null>();
   const [clickedIndex, setClickedIndex] = useState<number | null>(null);
   const url: string = "http://127.0.0.1:8000/songs/";
 
+  //Initial data fetch
   useEffect(() => {
     async function fetchData() {
       try {
@@ -19,6 +21,7 @@ export default function SideBar() {
           throw new Error("Failed to fetch data");
         }
         const Data: SongsProps[] = await response.json();
+        setAllData(allData);
         setAllMusic(Data);
         
 
@@ -29,10 +32,23 @@ export default function SideBar() {
     fetchData();
   }, []);
 
-
+// Seeding context and updating viewcount
   const handleClick = (index: number) => {
     setClickedIndex(index);
     handleSetData(allMusic[index]);
+    if (allMusic[index].song_name === allData.song_name){
+
+    }
+    useEffect(() => {
+      async function ViewCountUpdate() {
+        try {
+            
+        }
+        catch (error) {
+
+        }
+      }
+    })
   };
 
   return (

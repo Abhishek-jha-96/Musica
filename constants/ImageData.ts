@@ -9,3 +9,11 @@ export interface SongsProps {
   cover_url: string;
   song_url: string;
 }
+
+export interface AllSongsProps {
+  artists: string;
+  song_name: string;
+  id: number;
+  cover_url: string;
+  song_url: string;
+}
