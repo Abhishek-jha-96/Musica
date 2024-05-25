@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Song, TopTrack
+from .models import Song
 
 
 class SongSerializer(serializers.ModelSerializer):
@@ -7,19 +7,14 @@ class SongSerializer(serializers.ModelSerializer):
         model = Song
         fields = "__all__"
 
-    def create(self, validated_data):
-        # Create the Song instance
-        song = Song.objects.create(**validated_data)
-        
-        # Create the related TopTrack instance
-        TopTrack.objects.create(song=song, play_count=0)
-        
-        # Return the created song instance
-        return song
 
-
-
-class TopTrackSerializer(serializers.ModelSerializer):
+class Top3TrackSerializer(serializers.ModelSerializer):
     class Meta:
-        model = TopTrack   
-        fields = "__all__"     
+        model = Song
+        fields = "__all__"
+
+class TrackVoteUpdateSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Song
+        fields = "__all__"        

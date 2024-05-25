@@ -1,8 +1,8 @@
 from django.urls import path
-from Apis.views import Songlist, Top10Track, TrackCountUpdate
+from Apis.views import Songlist, Top3Track, TrackVoteUpdate
 
 urlpatterns = [
     path('songs/', Songlist.as_view()),
-    path('toptracks/', Top10Track.as_view()),
-    path('trackCount/<int:pk>/', TrackCountUpdate.as_view()),
+    path('toptracks/', Top3Track.as_view()),
+    path('trackvote/<int:pk>/', TrackVoteUpdate.as_view()),
 ]
