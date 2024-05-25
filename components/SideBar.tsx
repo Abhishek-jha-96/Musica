@@ -36,19 +36,7 @@ export default function SideBar() {
   const handleClick = (index: number) => {
     setClickedIndex(index);
     handleSetData(allMusic[index]);
-    if (allMusic[index].song_name === allData.song_name){
-
-    }
-    useEffect(() => {
-      async function ViewCountUpdate() {
-        try {
-            
-        }
-        catch (error) {
-
-        }
-      }
-    })
+    
   };
 
   return (

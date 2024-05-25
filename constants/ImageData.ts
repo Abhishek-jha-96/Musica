@@ -8,6 +8,7 @@ export interface SongsProps {
   song_name: string;
   cover_url: string;
   song_url: string;
+  votes?: number;
 }
 
 export interface AllSongsProps {

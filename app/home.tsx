@@ -13,8 +13,8 @@ export default function Music() {
             <Cover />
             </div>
         </div>
-        <h1 className="py-5 font-mono text-lg font-semibold">Top Tracks</h1>
-        <div>
+        <h1 className="py-5 font-mono text-lg font-semibold">Top 3 Tracks</h1>
+        <div className="w-full bg-white px-[10rem]">
             <CardElm />
         </div>
     </div>
