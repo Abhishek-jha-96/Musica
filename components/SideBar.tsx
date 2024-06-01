@@ -36,8 +36,8 @@ export default function SideBar() {
   const handleClick = (index: number) => {
     setClickedIndex(index);
     handleSetData(allMusic[index]);
-    
   };
+    
 
   return (
     <div className="w-full h-full">

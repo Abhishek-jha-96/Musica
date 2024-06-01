@@ -10,7 +10,7 @@ services:
     volumes:
       - .:/code
     env_file:
-      - .env/local/dev.env
+      - .envs/local/dev.env
     restart: always  
     depends_on:
       - db
@@ -19,6 +19,6 @@ services:
   db: 
     image: postgres:latest
     env_file:
-      - .env/local/dev.env
+      - .envs/local/dev.env
   
      
