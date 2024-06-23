@@ -38,6 +38,7 @@ next-env.d.ts
 
 /backend/myenv
 /backend/server/Apis/__pycache__/
+backend/server/Apis/migrations/__pycache__/
 /backend/server/server/__pycache__/
 
 db.sqlite3

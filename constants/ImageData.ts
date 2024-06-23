@@ -4,11 +4,12 @@ export interface ComponentProps {
 }
 
 export interface SongsProps {
+  id: number;
   artists: string;
   song_name: string;
   cover_url: string;
   song_url: string;
-  votes?: number;
+  votes: number;
 }
 
 export interface AllSongsProps {

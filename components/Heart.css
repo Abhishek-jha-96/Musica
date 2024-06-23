@@ -1,0 +1,44 @@
+/* Heart.css */
+
+.heart {
+    cursor: pointer;
+    transition: transform 0.2s;
+  }
+  
+  .heart.clicked {
+    animation: colorChange 1s forwards, giggle 0.5s;
+  }
+  
+  @keyframes colorChange {
+    0% {
+      fill: black;
+    }
+    25% {
+      fill: blue;
+    }
+    50% {
+      fill: green;
+    }
+    75% {
+      fill: yellow;
+    }
+    100% {
+      fill: red;
+    }
+  }
+  
+  @keyframes giggle {
+    0%, 100% {
+      transform: rotate(0);
+    }
+    25% {
+      transform: rotate(5deg);
+    }
+    50% {
+      transform: rotate(-5deg);
+    }
+    75% {
+      transform: rotate(5deg);
+    }
+  }
+  

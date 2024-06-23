@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import { Heart } from "lucide-react";
+import Heart from "@/components/Heart";
 import { useEffect, useState, useContext } from "react";
 import { MyContext } from "@/context/MyContext";
 import { SongsProps, AllSongsProps } from "@/constants/ImageData";
@@ -32,12 +32,39 @@ export default function SideBar() {
     fetchData();
   }, []);
 
-// Seeding context and updating viewcount
+// Seeding context.
   const handleClick = (index: number) => {
     setClickedIndex(index);
     handleSetData(allMusic[index]);
   };
-    
+  
+  const handleVote = async (index: number) => {
+    const updatedMusic = [...allMusic];
+    updatedMusic[index].votes += 1;
+    setAllMusic(updatedMusic);
+    const update_url = "http://localhost:8000/trackvote/"
+    try {
+      const response = await fetch(`${update_url}${updatedMusic[index].id}/`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ votes: updatedMusic[index].votes }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to update votes');
+      }
+
+      const updatedSong = await response.json();
+      setAllMusic((prev) =>
+        prev.map((song) => (song.id === updatedSong.id ? updatedSong : song))
+      );
+    } catch (error) {
+      console.error('Error updating votes:', error);
+    }
+  };
+
 
   return (
     <div className="w-full h-full">
@@ -58,7 +85,7 @@ export default function SideBar() {
           />
           <h1>{music.song_name}</h1>
           <div className="px-2">
-            <Heart fill="True" size={36} />
+            <Heart fill="True" size={36} votes={music.votes} onVote={() => handleVote(index)}/>
           </div>
         </div>
       ))}
