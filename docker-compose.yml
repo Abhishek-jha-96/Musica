@@ -1,0 +1,40 @@
+version: '4.0'
+
+services:
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/app
+      - /app/node_modules
+    environment:
+      - NODE_ENV=development
+    depends_on:
+      - backend
+
+  backend:
+    build:
+      context: ./backend/server
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./backend/server:/code
+    env_file:
+      - ./backend/server/.envs/local/dev.env
+    restart: always
+    depends_on:
+      - db
+
+  db:
+    image: postgres:latest
+    env_file:
+      - ./backend/server/.envs/local/dev.env
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
