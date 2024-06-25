@@ -28,21 +28,17 @@ export default function CardElm() {
     fetchTopTrack();
   }, []);
   return (
-    <div className="flex justify-between w-full">
+    <div className="w-full flex justify-between">
       {trackData.map((music, index) => (
-        <HoverCard>
+        <HoverCard key={index}>
           <HoverCardTrigger>
-            <div
-              key={index}
-              className="bg-black flex flex-col items-center px-2 py-3"
-            >
-              <Image
-                src={music.cover_url}
-                width={150}
-                height={100}
-                alt={music.song_name}
-              />
-              <h4 className="text-white py-2">{music.song_name}</h4>
+            <div className="max-w-sm rounded bg-yellow overflow-hidden shadow-lg">
+              <div
+                style={{ backgroundImage: `url(${music.cover_url})`, width: "150px", height: "100px", backgroundSize: "cover", backgroundPosition: "center"}}
+              ></div>
+              <div className="px-6 py-2">
+                <div className="font-bold text-xl mb-2">{music.song_name}</div>
+              </div>
             </div>
           </HoverCardTrigger>
           <HoverCardContent>
